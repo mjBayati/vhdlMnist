@@ -1,7 +1,5 @@
 library ieee;
---use ieee.std_logic_unsigned.all;
 use ieee.std_logic_1164.all;
---use ieee.std_logic_arith.or_reduce;
 use ieee.std_logic_misc.all;
 use ieee.numeric_std.all;
 
@@ -13,7 +11,6 @@ ENTITY adder IS
 	adder_output_num: OUT STD_LOGIC_VECTOR(vectorLength -1 downto 0);
 	adder_overflow: out std_logic 
 	);
-
 END adder;
 
 ARCHITECTURE description OF adder IS 
@@ -26,8 +23,6 @@ BEGIN
 
 	temp_adder_result <= a + b;
 
-	--temp_adder_result <= STD_LOGIC_VECTOR(('0' & adder_input_first) + ('0' & adder_input_second));
-	
 	adder_output_num <= STD_LOGIC_VECTOR(resize(temp_adder_result, vectorLength));
 	
 	temp <= a(a'high) & b(b'high) & temp_adder_result(temp_adder_result'high);
@@ -38,5 +33,4 @@ BEGIN
 	     else                             		   adder_overflow <= '0';
 	     end if;
 	end process;
-	--adder_overflow <= (temp = "001") or (temp = "110");
 END description;

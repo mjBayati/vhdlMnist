@@ -3,7 +3,6 @@ use ieee.std_logic_unsigned.all;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 
-
 ENTITY register_16 IS
 	generic(vectorLength : Integer := 16);
 	PORT(

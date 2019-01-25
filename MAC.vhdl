@@ -2,9 +2,7 @@ library ieee;
 use ieee.std_logic_unsigned.all;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
-
 use ieee.numeric_bit.all;
-
 
 entity MACtoplevel is 
 	generic(vectorLength : Integer := 16);
@@ -22,8 +20,7 @@ entity MACtoplevel is
 	mult_result: out std_logic_vector(vectorLength-1 downto 0);
 	overflow: out std_logic
 );
-
- end MACtoplevel;
+end MACtoplevel;
 
 ARCHITECTURE description OF MACtoplevel IS
 signal adderInput: STD_LOGIC_VECTOR(vectorLength - 1 downto 0);
@@ -92,8 +89,3 @@ BEGIN
 	overflow <= temp_ov;   
 
 END description;
-
-
-
-
-

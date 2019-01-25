@@ -24,8 +24,10 @@ entity neuron is
 		firstLayerCount: Integer :=20
 	); 
 	port(clk, reset : in std_logic;
+		start: in std_logic;
 		inputV, weightV : in array_2d(inputCount - 1 downto 0);
 		neuronOutput: out std_logic_vector(vectorLength-1 downto 0)
+		done: out std_logic
 	);
 end neuron;
 

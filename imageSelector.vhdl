@@ -9,7 +9,7 @@ entity imageSelector is
 		images : in inputMatrice(imageCnt-1 downto 0)(featureCnt-1 downto 0);
 		giveNext : in std_logic;
 		endOfImages : out std_logic;
-		outImage : out inputArray(featureCnt)
+		outImage : out inputArray(featureCnt-1 downto 0)
 	);
 end imageSelector;
 

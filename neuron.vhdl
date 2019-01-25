@@ -28,7 +28,7 @@ entity neuron is
 		inputV, weightV : in array_2d(inputCount - 1 downto 0);
 		isFirstLayer: in std_logic;
 		layerIndex: in Integer;
-		biasV: in array_2d(inputCount-1 downto 0);
+		biasV: in std_logic_vector(vectorLength-1 downto 0);
 		neuronOutput: out std_logic_vector(vectorLength-1 downto 0);
 		done: out std_logic
 	);
@@ -45,8 +45,6 @@ architecture implementation of neuron is
 	signal pastResult: std_logic_vector(vectorLength-1 downto 0);
 	signal inputIndex: Integer:= 0;
 	signal mult_result: std_logic_vector(vectorLength-1 downto 0);
-
-
 
 
 	component MAC_component is 
@@ -69,7 +67,6 @@ architecture implementation of neuron is
 	for all: MAC_component use entity work.MACtoplevel(description);
 
 
-
 	component InputSelectionComponent is 
 	generic(inputCount : Integer := 62; vectorLength : Integer := 16);
 	port(
@@ -81,20 +78,16 @@ architecture implementation of neuron is
 	for all: InputSelectionComponent use entity work.inputSelection(implementation);
 
 
-
-
-
 	component ActivationFunctionComponent is 
 	generic (bitVectorLength: integer:= 16);
 	port(
 		ready: in std_logic;
 		input_vector: in std_logic_vector;
+		biasVector: in std_logic_vector;
 		output_vector: out std_logic_vector
 		);
 	end component;
 	for all: ActivationFunctionComponent use entity work.ActivationFunction(description);
-
-
 
 
 	component ControllerComponent is 
@@ -105,8 +98,6 @@ architecture implementation of neuron is
 		);
 	end component;
 	for all: ControllerComponent use entity work.controller(implementation);
-
-
 
 
 BEGIN
@@ -137,13 +128,13 @@ BEGIN
 		);
 
 
-
-
 	func: ActivationFunctionComponent port map(
 		ready => controllerReady,
 		input_vector => macResult,
+		biasVector => biasV,
 		output_vector => neuronOutputTemp
 		);
+
 
 	selector: InputSelectionComponent port map(
 		inputVector => inputV, 
@@ -157,8 +148,6 @@ BEGIN
 		);
 
 	
-
-
 	controller: ControllerComponent port map(
 		clk => clk,
  		nextNum => controllerNext,

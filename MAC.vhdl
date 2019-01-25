@@ -12,9 +12,7 @@ entity MACtoplevel is
 	    en_mac: in std_logic;
 	    input_first: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
 		weight: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
-
 		pastInput: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
-
 		output_num: out STD_LOGIC_VECTOR(vectorLength-1 downto 0);
 		mult_result: out std_logic_vector(vectorLength-1 downto 0);
 		overflow: out std_logic

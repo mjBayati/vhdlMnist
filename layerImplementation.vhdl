@@ -68,7 +68,7 @@ architecture layerImplementation of layer is
 			weightV => weightMatrice(layerIndex),
 			isFirstLayer => isFirstLayer,
 			layerIndex => layerIndex,
-			biasV => biasVector,
+			biasV => biasVector(layerIndex),
 			neuronOutput => neuronOutput,
 			done => neuronDone	
 		);

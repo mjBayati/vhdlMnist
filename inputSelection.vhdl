@@ -16,7 +16,7 @@ use ieee.numeric_bit.all;
 use work.array_pkg.all;
 
 entity inputSelection is 
-generic(inputCount : Integer := 62; vectorLength : Integer := 16);
+generic(inputCount : Integer; vectorLength : Integer);
 port(inputVector, weightVector, pastInputVector: in  array_2d(inputCount - 1 downto 0);
   nextNumber, clk : in std_logic;
   value, weight, pastInput: out std_logic_vector(vectorLength-1 downto 0));

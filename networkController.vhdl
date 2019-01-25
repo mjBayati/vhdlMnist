@@ -22,7 +22,7 @@ begin
 	begin
 		if (reset='1') then
 			stateReg <= idle;
-		elsif then
+		elsif(rising_edge(clk)) then
 			stateReg <= stateNext;
 		end if;
 	end process;
@@ -72,17 +72,25 @@ begin
 	begin
 		giveNextImg <= '0';
 		startFirstLayer <= '0';
-		isFirstActive <= '0';
 		startSecondLayer <= '0';
 		case stateReg is 
+			when idle =>
+
 			when getImg =>
 				giveNextImg <= '1';
 
 			when initFirst =>
 				startFirstLayer <= '1';
 
+			when waitFirst =>
+
 			when initSecond =>
 				startSecondLayer <= '1';
+
+			when waitSecond =>
+
+			when findMax =>
+
 
 		end case;
 	end process;

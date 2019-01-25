@@ -7,7 +7,7 @@ entity findMax is
 	port (
 		clk : in std_logic;
 		results : in array_2d(outputCnt-1 downto 0);
-		index : in integer
+		index : out integer
 	);
 end findMax;
 
@@ -69,7 +69,7 @@ begin
 			m7 := m3;
 			i7 := i3; 
 		else
-			m7 := i4;
+			m7 := m4;
 			i7 := i4;
 		end if;
 
@@ -82,9 +82,9 @@ begin
 		end if; 
 
 		if m8 > m5 then
-			index := i8;
+			index <= i8;
 		else
-			index := i5;
+			index <= i5;
 		end if;
 		
 	end process;

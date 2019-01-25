@@ -2,7 +2,6 @@ library ieee;
 use ieee.std_logic_unsigned.all;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
-use ieee.std_logic_arith.SIGNED;
 
 entity ActivationFunction is 
 	generic (bitVectorLength: integer:= 4);
@@ -18,13 +17,13 @@ architecture description of ActivationFunction is
   signal temp_out: std_logic_vector(bitVectorLength - 1 downto 0);
   signal a, b: signed(bitVectorLength - 1 downto 0);
 begin
-  a <= resize(signed(input_vector), bitVectorLength);
-  b <= resize(signed(biasVector), bitVectorLength);
+  a <= signed(input_vector);
+  b <= signed(biasVector);
 
   sign_add_result <= a + b;
 
 
-  temp_out <= std_logic_vector(resize(sign_add_result, bitVectorLength));
+  temp_out <= std_logic_vector(sign_add_result);
 
 	middle <= (bitVectorLength-1 downto 0 => '0');
 	process(ready)

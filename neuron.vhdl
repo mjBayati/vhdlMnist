@@ -44,13 +44,13 @@ architecture implementation of neuron is
 	signal pastResult: std_logic_vector(vectorLength-1 downto 0);
 	signal inputIndex: Integer:= 0;
 	signal mult_result: std_logic_vector(vectorLength-1 downto 0);
-
+	signal controlReset, reset: std_logic := '0';
 
 	component MAC_component is 
 	generic(vectorLength : Integer := 16); 
 	port(
 		clk : in std_logic;
-	    reset: in std_logic;
+	    rst: in std_logic;
 	    en_mac: in std_logic;
 	    input_first: IN STD_LOGIC_VECTOR;
 		weight: IN STD_LOGIC_VECTOR;
@@ -92,14 +92,16 @@ architecture implementation of neuron is
 	component ControllerComponent is 
 	generic(inputCount : Integer := 8; vectorLength : Integer := 16); 
 	port(
-		clk : in std_logic;
- 		nextNum, ready: out std_logic
+		clk, start : in std_logic;
+ 		nextNum, ready, done, reset: out std_logic
 		);
 	end component;
 	for all: ControllerComponent use entity work.controller(implementation);
 
+	
 
 BEGIN
+	reset <= rst & controlReset;
 	neuronOutput <= neuronOutputTemp;
 	process(clk)
 	begin
@@ -149,8 +151,14 @@ BEGIN
 	
 	controller: ControllerComponent port map(
 		clk => clk,
+ 		start => start,
  		nextNum => controllerNext,
- 		ready => controllerReady
+ 		ready => controllerReady,
+ 		done => done,
+ 		reset => controlReset
 		);
+);
+
+
 
 END implementation;

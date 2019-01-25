@@ -27,6 +27,7 @@ ARCHITECTURE description OF MACtoplevel IS
 	signal temp_ov: std_logic := '0';
 	signal mult_ov: std_logic := '0';
 	signal output_temp: std_logic_vector(vectorLength-1 downto 0):= (vectorLength-1 downto 0 => '0'); 
+	signal multOutput: std_logic_vector(vectorLength-1 downto 0);
 
 	component adder1 port(
 		adder_input_first, adder_input_second: in STD_LOGIC_VECTOR;
@@ -56,16 +57,16 @@ BEGIN
 	process(clk)
 	begin
 		if (rising_edge (clk) and input_first = pastInput) then
-			adderInput <= pastResultMatrice;
+			adderInput <= multOutput;
 		else
-			adderInput <= mult_result;
+			adderInput <= multOutput;
 		end if;
 	end process;
 
 	multiplier: mult3 port map(
 		mult_input_num_first => input_first,
 		mult_input_num_second => weight,
-		mult_output_num=> mult_result,
+		mult_output_num=> multOutput,
 		mult_overflow => mult_ov
 		);
 	adder: adder1 port map(
@@ -84,5 +85,7 @@ BEGIN
 	output_num <= output_temp;
 	temp_ov <= adder_ov or mult_ov or temp_ov;
 	overflow <= temp_ov;   
+
+	mult_result <= multOutput;
 
 END description;

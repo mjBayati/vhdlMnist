@@ -17,12 +17,14 @@ begin
 		variable maxValue : std_logic_vector(15 downto 0) := (others => '0');
 		variable maxIndex : integer := 0;
 	begin
-		for i in 0 to outputCnt-1 loop
-			if signed(results(i)) > signed(maxValue) then
-				maxValue := results(i);
-				index := i;
-			end if;
-		end loop;
-		index <= i;
+		if (clk'event and clk='1') then
+			for i in 0 to outputCnt-1 loop
+				if signed(results(i)) > signed(maxValue) then
+					maxValue := results(i);
+					index := i;
+				end if;
+			end loop;
+			index <= i;
+		end if;
 	end process;
 end implementation;

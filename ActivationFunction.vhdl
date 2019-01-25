@@ -3,7 +3,6 @@ use ieee.std_logic_unsigned.all;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_arith.SIGNED;
---use ieee.numeric_bit.signed; 
 
 entity ActivationFunction is 
 	generic (bitVectorLength: integer:= 4);

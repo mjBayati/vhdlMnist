@@ -7,18 +7,17 @@ use ieee.numeric_bit.all;
 entity MACtoplevel is 
 	generic(vectorLength : Integer := 16);
 	port(
-    clk : in std_logic;
-    reset: in std_logic;
-    en_mac: in std_logic;
-    input_first: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
-	weight: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
+	    clk : in std_logic;
+	    reset: in std_logic;
+	    en_mac: in std_logic;
+	    input_first: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
+		weight: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
 
-	pastInput: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
-	pastResultMatrice: in STD_LOGIC_VECTOR(vectorLength-1 downto 0);
+		pastInput: IN STD_LOGIC_VECTOR(vectorLength-1 downto 0);
 
-	output_num: out STD_LOGIC_VECTOR(vectorLength-1 downto 0);
-	mult_result: out std_logic_vector(vectorLength-1 downto 0);
-	overflow: out std_logic
+		output_num: out STD_LOGIC_VECTOR(vectorLength-1 downto 0);
+		mult_result: out std_logic_vector(vectorLength-1 downto 0);
+		overflow: out std_logic
 );
 end MACtoplevel;
 

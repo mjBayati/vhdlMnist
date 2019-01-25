@@ -25,6 +25,11 @@ begin
 				outImage <= (others => '0');
 			end if;
 		end if;
+		if index = imageCnt - 1 then
+			endOfImages <= '1';
+		else
+			endOfImages <= '0';
+		end if;
 	end process;
 
 end implementation;

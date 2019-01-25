@@ -17,7 +17,6 @@ use ieee.std_logic_arith.all;
 use ieee.numeric_bit.all;
 use work.array_pkg.all;
 
-
 entity neuron is
 	generic(inputCount : Integer := 62;
 		vectorLength : Integer := 16;

@@ -25,4 +25,3 @@ BEGIN
 		end if;
 	end process;
 END description ; 
-

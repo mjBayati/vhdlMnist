@@ -20,14 +20,14 @@ entity MACtoplevel is
 end MACtoplevel;
 
 ARCHITECTURE description OF MACtoplevel IS
-signal adderInput: STD_LOGIC_VECTOR(vectorLength - 1 downto 0);
-signal adder_out_result: STD_LOGIC_VECTOR(vectorLength-1 downto 0);
-signal accu_result: STD_LOGIC_VECTOR(vectorLength-1 downto 0):= (vectorLength-1 downto 0 => '0');
-signal adder_ov: std_logic := '0';
-signal temp_ov: std_logic := '0';
-signal mult_ov: std_logic := '0';
-signal output_temp: std_logic_vector(vectorLength-1 downto 0):= (vectorLength-1 downto 0 => '0'); 
---BEGIN
+	signal adderInput: STD_LOGIC_VECTOR(vectorLength - 1 downto 0);
+	signal adder_out_result: STD_LOGIC_VECTOR(vectorLength-1 downto 0);
+	signal accu_result: STD_LOGIC_VECTOR(vectorLength-1 downto 0):= (vectorLength-1 downto 0 => '0');
+	signal adder_ov: std_logic := '0';
+	signal temp_ov: std_logic := '0';
+	signal mult_ov: std_logic := '0';
+	signal output_temp: std_logic_vector(vectorLength-1 downto 0):= (vectorLength-1 downto 0 => '0'); 
+
 	component adder1 port(
 		adder_input_first, adder_input_second: in STD_LOGIC_VECTOR;
 		adder_output_num: out STD_LOGIC_VECTOR;

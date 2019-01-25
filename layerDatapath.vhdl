@@ -39,7 +39,6 @@ end layerDatapath;
 architecture layerImplementation of layerDatapath is
 	signal weightV: array_2d(inputCount-1 downto 0);
 	signal neuronOutput: std_logic_vector(vectorLength-1 downto 0);
-	--signal counter: Integer:= 0;
 
 	component neuronComponent is
 		generic(inputCount : Integer := 62;
@@ -81,8 +80,3 @@ architecture layerImplementation of layerDatapath is
 	end process;
 		
 END layerImplementation;
-
-
-
-
-

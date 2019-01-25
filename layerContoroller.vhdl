@@ -14,7 +14,8 @@ entity layerContoroller is
 		neuronDone: in std_logic;
 		startNeuron: out std_logic;
 		done: out std_logic;
-		layerIndex: Integer
+		layerIndex: Integer;
+		loadNeuronResult: out std_logic
 	);
 end layerContoroller;
 
@@ -24,23 +25,28 @@ architecture layerContorollerImplementation of layerContoroller is
 begin 
 	 	controllerStates : process(clk)
 		begin 
-			if(rising_edge(clk) and  start = '1') then
+			if(rising_edge(clk)) then
 				if(start = '1' and state = 0) then
 					state <= 1;
 				elsif (state = 1 and counter < layerCount) then 
 					startNeuron <= '1';
 					state <= 2;
+					layerIndex <= counter;
 				elsif (state = 1 and counter = layerCount) then 
 					state <= 3;
+					layerIndex <= counter;
 				elsif(state = 2 and neuronDone = '1') then 
+					loadNeuronResult <= '1';
 					state <= 1;
 				elsif(state = 3) then 
 					state <= 0;
 					done <= '1';
 				else
+					loadNeuronResult <= '0';
 					done <= '0';
 					startNeuron <= '0';
 					state <= 0;
+					layerIndex <= counter;
 				end if;
 			end if;				
 		end process;
@@ -56,6 +62,6 @@ begin
 				counter <= 0; 
 			end if;
 		end process;
-		layerIndex <= counter;
+		
 
 end layerContorollerImplementation;

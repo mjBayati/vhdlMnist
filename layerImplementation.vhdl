@@ -24,21 +24,21 @@ entity layer is
 		layerCount: Integer :=20
 	); 
 	port(clk, reset : in std_logic;
-		start: in std_logic;
 		inputV : in array_2d(inputCount - 1 downto 0);
 		weightMatrice: in inputMatrice(layerCount-1 downto 0)(inputCount-1 downto 0);
 		biasVector: in array_2d(layerCount-1 downto 0);
-		layerOutput: out array_2d(layerCount-1 downto 0);
-		done: out std_logic
+		neuronStart: in std_logic;
+		layerIndex: in Integer;
+		isFirstLayer: in std_logic;
+		loadNeuronResult: in std_logic;
+		neuronDone: out std_logic;
+		layerOutput: out array_2d(layerCount-1 downto 0)
 	);
 end layer;
 
-architecture firstLayerImplementation of layer is
+architecture layerImplementation of layer is
 	signal weightV: array_2d(inputCount-1 downto 0);
 	signal neuronOutput: std_logic_vector(vectorLength-1 downto 0);
-	signal neuronStart: std_logic;
-	signal neuronDone: std_logic;
-	signal layerIndex: Integer:= 0;
 	--signal counter: Integer:= 0;
 
 	component neuronComponent is
@@ -49,6 +49,7 @@ architecture firstLayerImplementation of layer is
 		port(clk, reset : in std_logic;
 			start: in std_logic;
 			inputV, weightV : in array_2d(inputCount - 1 downto 0);
+			isFirstLayer: in std_logic;
 			neuronOutput: out std_logic_vector(vectorLength-1 downto 0);
 			done: out std_logic
 		);
@@ -63,13 +64,19 @@ architecture firstLayerImplementation of layer is
 			start => neuronStart,
 			inputV => inputV,
 			weightV => weightMatrice(layerIndex),
+			isFirstLayer => isFirstLayer,
 			neuronOutput => neuronOutput,
 			done => neuronDone	
 		);
 
-
+	process(clk, loadNeuronResult)
+	begin 
+		if(clk = '1' and loadNeuronResult = '1' and rising_edge(loadNeuronResult)) then
+			layerOutput(layerIndex) <= neuronOutput;
+		end if;
+	end process;
 		
-END firstLayerImplementation;
+END layerImplementation;
 
 
 

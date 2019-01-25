@@ -6,7 +6,7 @@ entity findMax is
 	generic (outputCnt : integer := 10);
 	port (
 		clk : in std_logic;
-		results : in inputArray(outputCnt-1 downto 0);
+		results : in array_2d(outputCnt-1 downto 0);
 		index : in integer
 	);
 end findMax;

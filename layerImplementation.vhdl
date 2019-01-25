@@ -18,7 +18,7 @@ use ieee.numeric_bit.all;
 use work.array_pkg.all;
 
 
-entity layer is
+entity layerDatapath is
 	generic(inputCount : Integer := 62;
 		vectorLength : Integer := 16;
 		layerCount: Integer :=20
@@ -34,9 +34,9 @@ entity layer is
 		neuronDone: out std_logic;
 		layerOutput: out array_2d(layerCount-1 downto 0)
 	);
-end layer;
+end layerDatapath;
 
-architecture layerImplementation of layer is
+architecture layerImplementation of layerDatapath is
 	signal weightV: array_2d(inputCount-1 downto 0);
 	signal neuronOutput: std_logic_vector(vectorLength-1 downto 0);
 	--signal counter: Integer:= 0;

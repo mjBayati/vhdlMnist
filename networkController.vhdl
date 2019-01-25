@@ -8,7 +8,7 @@ entity networkController is
 	port (
 		clk, reset : in std_logic;
 		start, firstLayerDone, secondLayerDone : in std_logic;
-		startFirstLayer, isFirstActive, startSecondLayer, giveNextImg : out std_logic
+		startFirstLayer, startSecondLayer, giveNextImg : out std_logic
 	);
 end networkController;
 
@@ -80,10 +80,6 @@ begin
 
 			when initFirst =>
 				startFirstLayer <= '1';
-				isFirstActive <= '1';
-
-			when waitFirst =>
-				isFirstActive <= '1';
 
 			when initSecond =>
 				startSecondLayer <= '1';
